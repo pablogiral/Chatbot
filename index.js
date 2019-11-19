@@ -4,6 +4,7 @@
 const dotenv = require('dotenv');
 const path = require('path');
 const restify = require('restify');
+// const axios = require('axios')
 
 // Import required bot services.
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
@@ -62,6 +63,9 @@ server.post('/api/messages', (req, res) => {
     });
 });
 
-// server.get('https://xz94zfs6u8.execute-api.eu-west-1.amazonaws.com/default/myBakery', (req, res) => {
-//     res.json();
-//  })
+
+fetch('https://xz94zfs6u8.execute-api.eu-west-1.amazonaws.com/default/myBakery')
+    .then(response => response.json())
+    .then(json => console.log(json))
+    
+
