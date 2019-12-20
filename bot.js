@@ -4,19 +4,30 @@
 //const axios = require("axios");
 const { ActivityHandler } = require("botbuilder");
 
-let food = fetch(
-    "https://xz94zfs6u8.execute-api.eu-west-1.amazonaws.com/default/myBakery"
-  ).then(response => response.json())
+
+
+// axios.get("https://xz94zfs6u8.execute-api.eu-west-1.amazonaws.com/default/myBakery")
+// .then((response) => {
+//   console.log(response.data);
+  
+// }, (error) => {
+//   console.log(error);
+// });
+
 
 class EchoBot extends ActivityHandler {
   constructor() {
     super();
     // See https://aka.ms/about-bot-activity-message to learn more about the message and other activity types.
     this.onMessage(async (context, next) => {
-      //await context.sendActivity(`You said '${ context.activity.text }'`);
-      await context.sendActivity(
-        `You said ${food}`
-      );
+      let food = await fetch(
+        "https://xz94zfs6u8.execute-api.eu-west-1.amazonaws.com/default/myBakery"
+      ).then(response => response.json())
+
+      await context.sendActivity(`${food}`);
+      // await context.sendActivity(
+      //   `You said ${food2}`
+      // );
       // By calling next() you ensure that the next BotHandler is run.
       await next();
     });
